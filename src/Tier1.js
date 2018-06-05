@@ -33,9 +33,10 @@ export default class Tier1 extends Component {
     this.setState({childColor: newColor})
     this.setState({grandchildColor: newChildColor})
   }
-
-  handleGrandchildClick(e) {
-    e.stopPropagation()
+  
+//OR can do it this way with ES7
+  handleGrandchildClick = (e) => { //Binds this as the component that contains it
+    e.stopPropagation() //Needed because it would bubble click events up
     let newColor=getRandomColor()
     this.setState({grandchildColor: newColor})
   }
@@ -45,8 +46,8 @@ export default class Tier1 extends Component {
     // present in our solution. What should they be replaced with?
     return (
       <div onClick={this.handleClick} className="tier1" style={{backgroundColor: this.state.color, color: this.state.color}}>
-        <Tier2 color={this.state.childColor} childColor={this.state.grandchildColor} handleClick={this.handleChildClick.bind(this)} handleGrandchildClick={this.handleGrandchildClick.bind(this)}/>
-        <Tier2 color={this.state.childColor} childColor={this.state.grandchildColor} handleClick={this.handleChildClick.bind(this)} handleGrandchildClick={this.handleGrandchildClick.bind(this)} />
+        <Tier2 color={this.state.childColor} childColor={this.state.grandchildColor} handleClick={this.handleChildClick.bind(this)} handleGrandchildClick={this.handleGrandchildClick}/>
+        <Tier2 color={this.state.childColor} childColor={this.state.grandchildColor} handleClick={this.handleChildClick.bind(this)} handleGrandchildClick={this.handleGrandchildClick} />
       </div>
     )
   }
